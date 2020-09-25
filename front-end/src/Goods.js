@@ -27,7 +27,7 @@ class Goods extends Component {
             <div className="goods">
                 <div className="main">
                     <h2>添加商品</h2>
-                    <form  onSubmit={this.submit}
+                    <form  onSubmit={this.submit}>
                         <div className="row">
                             <label htmlFor="name" className="label">名称</label>
                             <input className="text" type="text" placeholder="名称"
