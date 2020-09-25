@@ -3,6 +3,9 @@ package com.twuc.shopping.api;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.twuc.shopping.domain.Goods;
+import com.twuc.shopping.dto.GoodsDto;
+import com.twuc.shopping.repository.GoodsRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -11,7 +14,10 @@ import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.List;
+
 import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -22,7 +28,31 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class GoodsControllerTest {
   @Autowired
   MockMvc mockMvc;
+  @Autowired
+  GoodsRepository goodsRepository;
 
+  @BeforeEach
+  void setUp() {
+    goodsRepository.deleteAll();
+  }
+
+  @Test
+  void goods_dto_register() throws Exception {
+    Goods goods = new Goods("哇哈哈",5,"瓶",3);
+    ObjectMapper objectMapper = new ObjectMapper();
+    String json = objectMapper.writeValueAsString(goods);
+
+    mockMvc.perform(post("/user/goodsAddDto")
+            .content(json)
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk());
+
+    List<GoodsDto> goodss = goodsRepository.findAll();
+    assertEquals(1, goodss.size());
+    assertEquals("哇哈哈", goodss.get(0).getName());
+
+
+  }
   @Test
   void goods_can_add() throws Exception {
     Goods goods = new Goods("哇哈哈",5,"瓶",3);
