@@ -19,6 +19,7 @@ public class Goods implements Serializable {
   String name;
   @Min(0)
   float price;
+  @NotEmpty
   String units;
   int goodsNumber;
 }
