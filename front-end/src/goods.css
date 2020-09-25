@@ -1,0 +1,22 @@
+.label{
+    display:block;
+    height:30px;
+}
+form{
+    /*border:1px solid #02172b;*/
+    text-align:left;
+    padding-left: 80px;
+}
+.text{
+    height:30px;
+    width:90%;
+}
+.submit{
+    background-color: #2594fd;
+    color: white;
+    width:65px;
+    height:35px;
+    border:0px;
+    border-radius:5px;
+    font-weight:bold;
+}
