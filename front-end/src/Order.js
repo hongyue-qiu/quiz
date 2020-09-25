@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './order.css';
 
 class Order extends Component {
+
     render() {
         return (<div className="order">
             <div className="main">

@@ -13,6 +13,15 @@ class Goods extends Component {
             [filed]:e.target.value
         })
     }
+    submit = (e) =>{
+        e.method = 'POST';
+        e.target = '_blank'
+        e.action = 'http://localhost:8080/oder';
+    }
+    async componentDidMount() {
+
+
+    }
     render() {
         return (
             <div className="goods">
@@ -45,7 +54,8 @@ class Goods extends Component {
                             <input className="text" type="text" placeholder="图片" />
                         </div>
                         <input className="submit" type="submit" value="提交"
-                               disabled={!this.state.name || !this.state.price || !this.state.units}/>
+                               disabled={!this.state.name || !this.state.price || !this.state.units}
+                        onClick={(e) => this.submit(e)}/>
 
                     </form>
                 </div>
