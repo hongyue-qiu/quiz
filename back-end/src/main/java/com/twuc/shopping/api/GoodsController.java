@@ -37,7 +37,7 @@ public class GoodsController {
 	goodsLists.add(goods);
   }
 
-  @PostMapping("/user/goodsAddDto")
+  @PostMapping("/oder")
   public void registEntityUser(@Valid @RequestBody GoodsDto goods) {
 	GoodsDto goodsDto = GoodsDto.builder()
 			.name(goods.getName())

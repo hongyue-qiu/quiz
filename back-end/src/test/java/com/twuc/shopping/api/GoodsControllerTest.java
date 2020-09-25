@@ -64,7 +64,7 @@ public class GoodsControllerTest {
     ObjectMapper objectMapper = new ObjectMapper();
     String json = objectMapper.writeValueAsString(goods);
 
-    mockMvc.perform(post("/user/goodsAddDto")
+    mockMvc.perform(post("/order")
             .content(json)
             .contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk());
