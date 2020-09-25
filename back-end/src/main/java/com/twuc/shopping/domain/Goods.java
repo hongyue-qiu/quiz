@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
@@ -16,6 +17,7 @@ import java.io.Serializable;
 public class Goods implements Serializable {
   @NotEmpty
   String name;
+  @Min(0)
   float price;
   String units;
   int goodsNumber;

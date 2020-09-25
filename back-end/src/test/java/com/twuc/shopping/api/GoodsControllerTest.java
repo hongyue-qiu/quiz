@@ -47,5 +47,17 @@ public class GoodsControllerTest {
             .andExpect(status().isBadRequest());
 
   }
+  @Test
+  void goods_price_not_less_0() throws Exception {
+    Goods goods = new Goods("哇哈哈",-5,"瓶",3);
+    ObjectMapper objectMapper = new ObjectMapper();
+    String json = objectMapper.writeValueAsString(goods);
+
+    mockMvc.perform(post("/goods/goodsAdd")
+            .content(json)
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isBadRequest());
+
+  }
 
 }
