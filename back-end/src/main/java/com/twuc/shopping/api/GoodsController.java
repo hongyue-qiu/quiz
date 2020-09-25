@@ -6,13 +6,12 @@ import com.twuc.shopping.repository.GoodsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @Validated
@@ -24,6 +23,7 @@ public class GoodsController {
   public GoodsController(GoodsRepository goodsRepository) {
 	this.goodsRepository = goodsRepository;
   }
+
   List<Goods> goodsLists = initGoodsList();
 
   private List<Goods> initGoodsList() {
@@ -47,6 +47,21 @@ public class GoodsController {
 			.url(goods.getUrl())
 			.build();
 	goodsRepository.save(goodsDto);
+  }
+
+  @GetMapping("/order")
+  public ResponseEntity<List<GoodsDto>> getRsEventListBetween() {
+	List<GoodsDto> goodsDtos = goodsRepository.findAll().stream()
+					.map(item -> GoodsDto.builder()
+							.name(item.getName())
+							.price(item.getPrice())
+							.units(item.getUnits())
+							.goodsNumber(item.getGoodsNumber())
+							.url(item.getUrl())
+							.build())
+					.collect(Collectors.toList());
+
+	return ResponseEntity.ok(goodsDtos);
   }
 
 }

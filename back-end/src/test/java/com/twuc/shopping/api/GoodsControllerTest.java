@@ -16,8 +16,10 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.hasKey;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -34,6 +36,26 @@ public class GoodsControllerTest {
   @BeforeEach
   void setUp() {
     goodsRepository.deleteAll();
+  }
+
+  @Test
+  public void should_get_goods_ist() throws Exception {
+    GoodsDto goodsDto = GoodsDto.builder()
+            .name("哇哈哈")
+            .price(5)
+            .units("瓶")
+            .goodsNumber(10)
+            .url("aaa/")
+            .build();
+    GoodsDto save = goodsRepository.save(goodsDto);
+
+
+    mockMvc
+            .perform(get("/order"))
+            .andExpect(jsonPath("$", hasSize(1)))
+            .andExpect(jsonPath("$[0].name", is("哇哈哈")))
+            .andExpect(jsonPath("$[0].units", is("瓶")))
+            .andExpect(status().isOk());
   }
 
   @Test
