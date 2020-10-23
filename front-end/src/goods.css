@@ -10,6 +10,7 @@ form{
 .text{
     height:30px;
     width:90%;
+    padding-left: 10px;
 }
 .submit{
     background-color: #2594fd;
@@ -19,4 +20,9 @@ form{
     border:0px;
     border-radius:5px;
     font-weight:bold;
+}
+.notnull{
+    color:red;
+    margin-right:5px;
+    margin-top: 25px;
 }
