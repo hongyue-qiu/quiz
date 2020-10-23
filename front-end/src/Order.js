@@ -7,15 +7,11 @@ class Order extends Component {
         orders:[]
     }
 
-    componentDidMount() {
-        fetch('http://localhost:8080/order').then(response => {
-            if (response.status === 200) {
-                return response.json();
-            }
-        }).then(data => {
-            this.setState({
-                orders: data
-            })
+    async componentDidMount() {
+        const response = await fetch('http://localhost:8080/order');
+        const data = await response.json();
+        this.setState({
+            orders: data,
         })
 
     }
