@@ -22,13 +22,15 @@ class Home extends Component{
         return (<div className="home">
             <div className="main">
                 <div className="allGoods">
-                    <GoodsItem/>
+                    {/*<GoodsItem/>*/}
                     {
                         this.state.orders.map((order, index) => {
                             return <GoodsItem item = {order} key = {`order${index}`}></GoodsItem>
                         })
                     }
                 </div>
+                <div className="shopping-cart">购</div>
+                <div className="shopping-cart-list"></div>
             </div>
         </div>);
     }
@@ -36,12 +38,16 @@ class Home extends Component{
 };
 
 class GoodsItem extends Component {
+    handleAddItem(){
+
+    }
     render() {
         return (
             <div className="oneItem">
-                <img className="item-img" src="https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1603422390&di=f32cd295bac48531d16d47a96ced24ce&src=http://img1.pclady.com.cn/pclady/1008/12/589623_cb4aa1.jpg"/>
-                <p className="item-title">可乐</p>
-                <p className="item-price">单价：1元/瓶</p>
+                <img className="item-img" src={this.props.item.url}/>
+                <p className="item-title">{this.props.item.name}</p>
+                <p className="item-price">{`单价：${this.props.item.price}元/${this.props.item.units}`}</p>
+                <button className="item-add" onClick={this.handleAddItem}>+</button>
             </div>
         );
     }

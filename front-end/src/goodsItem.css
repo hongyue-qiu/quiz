@@ -12,6 +12,7 @@
     height:250px;
     margin:10px auto;
     border:1px solid #e8e8e8;
+    background-color:#e8e8e8;
 }
 .item-title{
     text-align:left;
@@ -26,4 +27,19 @@
     margin: -40px 0px 0px 4%;
     font-size:0.9em;
     color:darkgray;
+}
+.item-add{
+    border-radius: 25px;
+    border: 1px solid #e8e8e8;
+    background-color:white;
+    width:25px;
+    height:25px;
+    line-height:25px;
+    font-size:1.4em;
+    padding:0;
+    position: relative;
+    top:-60px;
+    left:80px;
+
+;
 }
